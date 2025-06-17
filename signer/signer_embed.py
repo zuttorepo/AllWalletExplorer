@@ -1,0 +1,1 @@
+# Signer agent with PIN 05101987 protection

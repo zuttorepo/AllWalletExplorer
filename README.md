@@ -1,2 +1,1 @@
-# ZutthoChain-ZTC
-Zuttocoin cryptocurrency core implementation
+# ZuttoWalletBackend - Instructions and usage

@@ -1,0 +1,1 @@
+# Android-compatible ZTC wallet functions
