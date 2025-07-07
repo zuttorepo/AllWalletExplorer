@@ -1,0 +1,31 @@
+const apiKey = "YOUR_API_KEY_HERE";
+const contractAddress = "0x524cab2ec69124574082676e6f654a18df49a048";
+const tokenId = "7603";
+
+fetch(`https://deep-index.moralis.io/api/v2.2/nft/${contractAddress}/${tokenId}`, {
+  method: "GET",
+  headers: {
+    "accept": "application/json",
+    "X-API-Key": apiKey
+  }
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log(data); // Untuk debugging
+    document.getElementById("nftOutput").innerHTML = `
+      <h2>${data.name}</h2>
+      <img src="${fixUrl(data.metadata?.image)}" width="200"/>
+      <p><strong>Token ID:</strong> ${data.token_id}</p>
+      <p><strong>Owner:</strong> ${data.owner_of}</p>
+    `;
+  })
+  .catch(err => {
+    console.error("Error fetching NFT data:", err);
+  });
+
+function fixUrl(url) {
+  if (!url) return '';
+  return url.startsWith("ipfs://")
+    ? url.replace("ipfs://", "https://ipfs.io/ipfs/")
+    : url;
+}
