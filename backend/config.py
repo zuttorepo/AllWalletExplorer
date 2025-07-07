@@ -1,1 +1,0 @@
-# Configuration file for ZTC backend
