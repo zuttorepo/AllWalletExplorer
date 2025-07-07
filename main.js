@@ -67,3 +67,8 @@ function getSymbol(chain) {
     default: return "NATIVE";
   }
 }
+
+curl --request GET \
+  --url 'https://deep-index.moralis.io/api/v2.2/nft/0x524cab2ec69124574082676e6f654a18df49a048/7603' \
+  --header 'accept: application/json' \
+  --header 'X-API-Key: MORALIS_API_KEY
