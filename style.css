@@ -1,0 +1,108 @@
+/* === Font & Body === */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background-color: #000;
+  color: #FFD700;
+}
+
+/* === Kontainer Utama === */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* === Judul === */
+h1 {
+  font-size: 2.2em;
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px #FFD700;
+}
+
+/* === Input & Select === */
+.input-section {
+  margin-bottom: 30px;
+}
+
+input[type="text"], select {
+  padding: 12px;
+  width: 60%;
+  max-width: 400px;
+  border: 2px solid #FFD700;
+  background: #111;
+  color: #FFD700;
+  border-radius: 8px;
+  font-size: 1em;
+  margin: 5px;
+}
+
+/* === Tombol === */
+button {
+  padding: 12px 20px;
+  font-size: 1em;
+  color: #000;
+  background: #FFD700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #FFD700;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background: #ffcc00;
+  transform: scale(1.05);
+}
+
+/* === Card Box === */
+.card {
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #FFD70044;
+  text-align: left;
+  font-family: Arial, sans-serif; /* Font lebih nyaman baca */
+  color: #f1f1f1;
+}
+
+/* === Section Title === */
+.card h2 {
+  color: #FFD700;
+  font-size: 1.2em;
+  border-bottom: 1px solid #FFD70033;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+/* === Balance === */
+.highlight {
+  font-size: 1.4em;
+  color: #00ffc8;
+  margin-bottom: 20px;
+}
+
+/* === List === */
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+li {
+  padding: 6px 0;
+  border-bottom: 1px solid #FFD70022;
+  font-size: 0.95em;
+  color: #ddd;
+}
+
+/* === Footer === */
+footer {
+  margin-top: 40px;
+  font-size: 0.85em;
+  color: #888;
+  border-top: 1px dashed #333;
+  padding-top: 10px;
+}

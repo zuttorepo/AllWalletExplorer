@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ZTC Wallet Explorer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🔎 All Wallet Explorer</h1>
+    <div class="input-section">
+      <input type="text" id="addressInput" placeholder="Enter any crypto wallet address..." />
+      <select id="chainSelect">
+        <option value="eth">Ethereum</option>
+        <option value="bsc">BSC</option>
+        <option value="polygon">Polygon</option>
+        <option value="avalanche">Avalanche</option>
+      </select>
+      <button onclick="fetchWalletInfo()">Check Wallet</button>
+    </div>
+<p>Check your dopet address here ETH/BNB/POLIGON/ and All Crypto Token</p>
+    <div id="output" class="card">
+      <h2>Balance</h2>
+      <p id="balance" class="highlight">-</p>
+
+      <h2>Tokens</h2>
+      <ul id="tokens"></ul>
+
+      <h2>Transactions</h2>
+      <ul id="transactions"></ul>
+    </div>
+
+    <footer>
+      <p>🚀 Powered by Moralis Web3 API | Made by ZTC Team</p>
+      <p>Donate: <span id="ztcAddress">ZTC12345...abc</span></p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
