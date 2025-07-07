@@ -1,6 +1,6 @@
-const MORALIS_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImEzMDFiNmE2LTZhMjktNDBmOC04Y2I0LTExODVjYmY2YzcyYSIsIm9yZ0lkIjoiNDU4MDEzIiwidXNlcklkIjoiNDcxMjE5IiwidHlwZUlkIjoiNjUxMTIzZmMtMzRhZS00NTFmLTllNjMtMDRmM2IyNDM0NWY2IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3NTE4OTAwNTIsImV4cCI6NDkwNzY1MDA1Mn0.KPkvPtq-DdqEDjJ7OaqkYl11218nL5fodGVxVXN3oqw"; // pakai punyamu
+const MORALIS_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImEzMDFiNmE2LTZhMjktNDBmOC04Y2I0LTExODVjYmY2YzcyYSIsIm9yZ0lkIjoiNDU4MDEzIiwidXNlcklkIjoiNDcxMjE5IiwidHlwZUlkIjoiNjUxMTIzZmMtMzRhZS00NTFmLTllNjMtMDRmM2IyNDM0NWY2IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3NTE4OTAwNTIsImV4cCI6NDkwNzY1MDA1Mn0.KPkvPtq-DdqEDjJ7OaqkYl11218nL5fodGVxVXN3oqw"; // Ganti dengan API key kamu yang valid
 
-
+// Fungsi untuk ambil saldo wallet, token, dan transaksi
 async function fetchWalletInfo() {
   const address = document.getElementById("addressInput").value.trim();
   const chain = document.getElementById("chainSelect").value;
@@ -10,10 +10,10 @@ async function fetchWalletInfo() {
     return;
   }
 
-  // Fetch native balance
+  // 1. Fetch Native Balance
   const balanceRes = await fetch(`https://deep-index.moralis.io/api/v2.2/${address}/balance?chain=${chain}`, {
     headers: {
-      "accept": "application/json",
+      accept: "application/json",
       "X-API-Key": MORALIS_API_KEY
     }
   });
@@ -22,10 +22,10 @@ async function fetchWalletInfo() {
   const native = parseFloat(balanceData.balance) / 1e18;
   document.getElementById("balance").innerText = `${native.toFixed(6)} ${getSymbol(chain)}`;
 
-  // Fetch token balances
+  // 2. Fetch ERC20 Tokens
   const tokenRes = await fetch(`https://deep-index.moralis.io/api/v2.2/${address}/erc20?chain=${chain}`, {
     headers: {
-      "accept": "application/json",
+      accept: "application/json",
       "X-API-Key": MORALIS_API_KEY
     }
   });
@@ -33,6 +33,7 @@ async function fetchWalletInfo() {
   const tokens = await tokenRes.json();
   const tokenList = document.getElementById("tokens");
   tokenList.innerHTML = "";
+
   tokens.forEach(token => {
     const li = document.createElement("li");
     const amount = parseFloat(token.balance) / Math.pow(10, token.decimals);
@@ -40,10 +41,10 @@ async function fetchWalletInfo() {
     tokenList.appendChild(li);
   });
 
-  // Fetch transaction history (last 5)
+  // 3. Fetch Last 5 Transactions
   const txRes = await fetch(`https://deep-index.moralis.io/api/v2.2/${address}?chain=${chain}`, {
     headers: {
-      "accept": "application/json",
+      accept: "application/json",
       "X-API-Key": MORALIS_API_KEY
     }
   });
@@ -51,6 +52,7 @@ async function fetchWalletInfo() {
   const txData = await txRes.json();
   const txList = document.getElementById("transactions");
   txList.innerHTML = "";
+
   txData.result.slice(0, 5).forEach(tx => {
     const li = document.createElement("li");
     li.textContent = `From ${tx.from_address.slice(0, 6)}... To ${tx.to_address.slice(0, 6)}... | ${parseFloat(tx.value) / 1e18} ${getSymbol(chain)}`;
@@ -58,6 +60,7 @@ async function fetchWalletInfo() {
   });
 }
 
+// Mendapatkan simbol token berdasarkan jaringan
 function getSymbol(chain) {
   switch (chain) {
     case "eth": return "ETH";
@@ -68,66 +71,38 @@ function getSymbol(chain) {
   }
 }
 
-curl --request GET \
-  --url 'https://deep-index.moralis.io/api/v2.2/nft/0x524cab2ec69124574082676e6f654a18df49a048/7603' \
-  --header 'accept: application/json' \
-  --header 'X-API-Key: MORALIS_API_KEY
-
-
-// Contoh: tampilkan NFT metadata untuk token tertentu
+// Fungsi untuk cek NFT berdasarkan contract + token ID
 async function fetchNFT(contract, tokenId) {
-  const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImEzMDFiNmE2LTZhMjktNDBmOC04Y2I0LTExODVjYmY2YzcyYSIsIm9yZ0lkIjoiNDU4MDEzIiwidXNlcklkIjoiNDcxMjE5IiwidHlwZUlkIjoiNjUxMTIzZmMtMzRhZS00NTFmLTllNjMtMDRmM2IyNDM0NWY2IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3NTE4OTAwNTIsImV4cCI6NDkwNzY1MDA1Mn0.KPkvPtq-DdqEDjJ7OaqkYl11218nL5fodGVxVXN3oqw"; // ganti dengan key kamu
-  try {
-    const res = await fetch(
-      `https://deep-index.moralis.io/api/v2.2/nft/${contract}/${tokenId}?chain=eth`,
-      {
-        headers: {
-          accept: "application/json",
-          "X-API-Key": MORALIS_API_KEY
-        }
-      }
-    );
-    if (!res.ok) throw new Error(await res.text());
-    const data = await res.json();
+  const url = `https://deep-index.moralis.io/api/v2.2/nft/${contract}/${tokenId}?chain=eth`;
 
-    const imgURL = data.metadata?.image
-      ? data.metadata.image.replace("ipfs://", "https://ipfs.io/ipfs/")
-      : "";
+  try {
+    const res = await fetch(url, {
+      headers: {
+        accept: "application/json",
+        "X-API-Key": MORALIS_API_KEY
+      }
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const data = await res.json();
+    const img = data.metadata?.image?.replace("ipfs://", "https://ipfs.io/ipfs/") || "";
+    const name = data.name || `NFT #${tokenId}`;
 
     document.getElementById("nftOutput").innerHTML = `
-      <h2>${data.name || `#${data.token_id}`}</h2>
-      ${imgURL ? `<img src="${imgURL}" width="200" alt="NFT image"/>` : ""}
+      <h3>${name}</h3>
+      ${img ? `<img src="${img}" width="200" />` : ""}
       <p><strong>Owner:</strong> ${data.owner_of || "Unknown"}</p>
+      <p><strong>Token ID:</strong> ${data.token_id}</p>
     `;
   } catch (err) {
     document.getElementById("nftOutput").innerHTML = `<p class="error">Error: ${err.message}</p>`;
   }
 }
-async function fetchNFT() {
-  const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImEzMDFiNmE2LTZhMjktNDBmOC04Y2I0LTExODVjYmY2YzcyYSIsIm9yZ0lkIjoiNDU4MDEzIiwidXNlcklkIjoiNDcxMjE5IiwidHlwZUlkIjoiNjUxMTIzZmMtMzRhZS00NTFmLTllNjMtMDRmM2IyNDM0NWY2IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3NTE4OTAwNTIsImV4cCI6NDkwNzY1MDA1Mn0.KPkvPtq-DdqEDjJ7OaqkYl11218nL5fodGVxVXN3oqw';
+
+// Fungsi khusus untuk menampilkan NFT statis #7603
+function fetchNFT7603() {
   const contract = '0x524cab2ec69124574082676e6f654a18df49a048';
   const tokenId = '7603';
-
-  const response = await fetch(`https://deep-index.moralis.io/api/v2.2/nft/${contract}/${tokenId}?chain=eth`, {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      'X-API-Key': MORALIS_API_KEY
-    }
-  });
-
-  if (!response.ok) {
-    document.getElementById("nftOutput").innerHTML = `<p>Error: ${response.status}</p>`;
-    return;
-  }
-
-  const data = await response.json();
-  const img = data.metadata?.image?.replace("ipfs://", "https://ipfs.io/ipfs/") || "";
-
-  document.getElementById("nftOutput").innerHTML = `
-    <h3>${data.name || "NFT #" + tokenId}</h3>
-    ${img ? `<img src="${img}" width="200" />` : ''}
-    <p><strong>Owner:</strong> ${data.owner_of}</p>
-    <p><strong>Token ID:</strong> ${data.token_id}</p>
-  `;
+  fetchNFT(contract, tokenId);
 }
