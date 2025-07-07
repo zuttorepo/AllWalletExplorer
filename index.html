@@ -37,6 +37,12 @@
       <p>Donate: <span id="ztcAddress">ZTC12345...abc</span></p>
     </footer>
   </div>
+  <div class="nft-section">
+  <input type="text" id="contractInput" placeholder="Contract address" />
+  <input type="text" id="tokenIdInput" placeholder="Token ID" />
+  <button onclick="fetchNFT(contractInput.value, tokenIdInput.value)">Check NFT</button>
+</div>
+
   <div id="nftOutput" class="card"></div>
   <script src="main.js"></script>
 </body>
