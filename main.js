@@ -103,3 +103,31 @@ async function fetchNFT(contract, tokenId) {
     document.getElementById("nftOutput").innerHTML = `<p class="error">Error: ${err.message}</p>`;
   }
 }
+async function fetchNFT() {
+  const apiKey = 'ISI_API_KEY_KAMU_DI_SINI';
+  const contract = '0x524cab2ec69124574082676e6f654a18df49a048';
+  const tokenId = '7603';
+
+  const response = await fetch(`https://deep-index.moralis.io/api/v2.2/nft/${contract}/${tokenId}?chain=eth`, {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      'X-API-Key': apiKey
+    }
+  });
+
+  if (!response.ok) {
+    document.getElementById("nftOutput").innerHTML = `<p>Error: ${response.status}</p>`;
+    return;
+  }
+
+  const data = await response.json();
+  const img = data.metadata?.image?.replace("ipfs://", "https://ipfs.io/ipfs/") || "";
+
+  document.getElementById("nftOutput").innerHTML = `
+    <h3>${data.name || "NFT #" + tokenId}</h3>
+    ${img ? `<img src="${img}" width="200" />` : ''}
+    <p><strong>Owner:</strong> ${data.owner_of}</p>
+    <p><strong>Token ID:</strong> ${data.token_id}</p>
+  `;
+}
