@@ -1,1 +1,0 @@
-# Offline desktop wallet GUI for ZTC
