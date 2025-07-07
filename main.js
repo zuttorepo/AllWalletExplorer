@@ -104,7 +104,7 @@ async function fetchNFT(contract, tokenId) {
   }
 }
 async function fetchNFT() {
-  const apiKey = 'ISI_API_KEY_KAMU_DI_SINI';
+  const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImEzMDFiNmE2LTZhMjktNDBmOC04Y2I0LTExODVjYmY2YzcyYSIsIm9yZ0lkIjoiNDU4MDEzIiwidXNlcklkIjoiNDcxMjE5IiwidHlwZUlkIjoiNjUxMTIzZmMtMzRhZS00NTFmLTllNjMtMDRmM2IyNDM0NWY2IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3NTE4OTAwNTIsImV4cCI6NDkwNzY1MDA1Mn0.KPkvPtq-DdqEDjJ7OaqkYl11218nL5fodGVxVXN3oqw';
   const contract = '0x524cab2ec69124574082676e6f654a18df49a048';
   const tokenId = '7603';
 
@@ -112,7 +112,7 @@ async function fetchNFT() {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      'X-API-Key': apiKey
+      'X-API-Key': MORALIS_API_KEY
     }
   });
 
