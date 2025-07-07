@@ -10,6 +10,7 @@
 <body>
   <div class="container">
     <h1>🔎 All Wallet Explorer</h1>
+
     <div class="input-section">
       <input type="text" id="addressInput" placeholder="Enter any crypto wallet address..." />
       <select id="chainSelect">
@@ -20,7 +21,9 @@
       </select>
       <button onclick="fetchWalletInfo()">Check Wallet</button>
     </div>
-<p>Check your dopet address here ETH/BNB/POLIGON/ and All Crypto Token</p>
+
+    <p>Check your dompet address here — ETH / BNB / Polygon / All Crypto Tokens</p>
+
     <div id="output" class="card">
       <h2>Balance</h2>
       <p id="balance" class="highlight">-</p>
@@ -32,26 +35,29 @@
       <ul id="transactions"></ul>
     </div>
 
-    <footer>
+    <section class="nft-section" style="background:#111; color:#ffd700; padding:20px; margin-top:30px; border-radius:10px;">
+      <h2>🎨 NFT Viewer (Manual Input)</h2>
+      <input type="text" id="contractInput" placeholder="Contract address" />
+      <input type="text" id="tokenIdInput" placeholder="Token ID" />
+      <button onclick="fetchNFT(contractInput.value, tokenIdInput.value)">Check NFT</button>
+      <div id="nftOutput" style="margin-top:20px;"></div>
+    </section>
+
+    <section style="background:#000; color:#ffd700; padding:20px; margin-top:30px; border-radius:10px;">
+      <h2>📦 NFT Viewer (Static #7603)</h2>
+      <button onclick="fetchNFT7603()" style="padding:10px 20px; background:#111; color:#ffd700; border:1px solid #ffd700; border-radius:8px;">
+        Tampilkan NFT #7603
+      </button>
+      <div id="nftOutput7603" style="margin-top:20px;"></div>
+    </section>
+
+    <footer style="margin-top:40px;">
       <p>🚀 Powered by Moralis Web3 API | Made by ZTC Team</p>
       <p>Donate: <span id="ztcAddress">ZTC12345...abc</span></p>
     </footer>
   </div>
-  <div class="nft-section">
-  <input type="text" id="contractInput" placeholder="Contract address" />
-  <input type="text" id="tokenIdInput" placeholder="Token ID" />
-  <button onclick="fetchNFT(contractInput.value, tokenIdInput.value)">Check NFT</button>
-</div>
 
-  <section style="background:#000; color:#ffd700; padding:20px; margin-top:30px;">
-  <h2>📦 NFT Viewer</h2>
-  <button onclick="fetchNFT()" style="padding:10px 20px; background:#111; color:#ffd700; border:1px solid #ffd700; border-radius:8px;">
-    Tampilkan NFT #7603
-  </button>
-  <div id="nftOutput" style="margin-top:20px;"></div>
-</section>
-
-<script src="nft.js"></script>
-<script src="main.js"></script>
+  <script src="nft.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
