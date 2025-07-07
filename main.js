@@ -72,3 +72,34 @@ curl --request GET \
   --url 'https://deep-index.moralis.io/api/v2.2/nft/0x524cab2ec69124574082676e6f654a18df49a048/7603' \
   --header 'accept: application/json' \
   --header 'X-API-Key: MORALIS_API_KEY
+
+
+// Contoh: tampilkan NFT metadata untuk token tertentu
+async function fetchNFT(contract, tokenId) {
+  const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImEzMDFiNmE2LTZhMjktNDBmOC04Y2I0LTExODVjYmY2YzcyYSIsIm9yZ0lkIjoiNDU4MDEzIiwidXNlcklkIjoiNDcxMjE5IiwidHlwZUlkIjoiNjUxMTIzZmMtMzRhZS00NTFmLTllNjMtMDRmM2IyNDM0NWY2IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3NTE4OTAwNTIsImV4cCI6NDkwNzY1MDA1Mn0.KPkvPtq-DdqEDjJ7OaqkYl11218nL5fodGVxVXN3oqw"; // ganti dengan key kamu
+  try {
+    const res = await fetch(
+      `https://deep-index.moralis.io/api/v2.2/nft/${contract}/${tokenId}?chain=eth`,
+      {
+        headers: {
+          accept: "application/json",
+          "X-API-Key": MORALIS_API_KEY
+        }
+      }
+    );
+    if (!res.ok) throw new Error(await res.text());
+    const data = await res.json();
+
+    const imgURL = data.metadata?.image
+      ? data.metadata.image.replace("ipfs://", "https://ipfs.io/ipfs/")
+      : "";
+
+    document.getElementById("nftOutput").innerHTML = `
+      <h2>${data.name || `#${data.token_id}`}</h2>
+      ${imgURL ? `<img src="${imgURL}" width="200" alt="NFT image"/>` : ""}
+      <p><strong>Owner:</strong> ${data.owner_of || "Unknown"}</p>
+    `;
+  } catch (err) {
+    document.getElementById("nftOutput").innerHTML = `<p class="error">Error: ${err.message}</p>`;
+  }
+}
