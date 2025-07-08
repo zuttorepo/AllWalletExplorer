@@ -106,3 +106,16 @@ function fetchNFT7603() {
   const tokenId = '7603';
   fetchNFT(contract, tokenId);
 }
+
+
+async function fetchBalance(address) {
+  try {
+    const res = await fetch(`http://localhost:3000/balance/${address}`);
+    const data = await res.json();
+    console.log("DEBUG data balance:", data); // ← Tambahkan log ini
+    document.getElementById("balance").innerText = `Balance: ${data.balance} ZTC`;
+  } catch (e) {
+    document.getElementById("balance").innerText = "Balance: Error";
+    console.error(e);
+  }
+}
