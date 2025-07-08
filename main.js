@@ -1,4 +1,4 @@
-const MORALIS_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImEzMDFiNmE2LTZhMjktNDBmOC04Y2I0LTExODVjYmY2YzcyYSIsIm9yZ0lkIjoiNDU4MDEzIiwidXNlcklkIjoiNDcxMjE5IiwidHlwZUlkIjoiNjUxMTIzZmMtMzRhZS00NTFmLTllNjMtMDRmM2IyNDM0NWY2IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3NTE4OTAwNTIsImV4cCI6NDkwNzY1MDA1Mn0.KPkvPtq-DdqEDjJ7OaqkYl11218nL5fodGVxVXN3oqw"; // Ganti dengan API key kamu yang valid
+const MORALIS_API_KEY = "N3oqw"; // Ganti dengan API key kamu yang valid
 
 // Fungsi untuk ambil saldo wallet, token, dan transaksi
 async function fetchWalletInfo() {
